@@ -25,13 +25,13 @@ const spawn = require("cross-spawn");
 
 export const witchSimulatorIsInstalled = async () => {
   try {
-    const { stdout } = await spawnAsync("emulator", ["-list-avds"], {
-      env: {
-        NODE_ENV: "production",
-        PATH: process.env.PATH,
-      },
-    });
-    // const { stdout } = await spawnAsync("emulator", ["-list-avds"]);
+    // const { stdout } = await spawnAsync("emulator", ["-list-avds"], {
+    //   env: {
+    //     NODE_ENV: "production",
+    //     PATH: process.env.PATH,
+    //   },
+    // });
+    const { stdout } = await spawnAsync("emulator", ["-list-avds"]);
     return stdout;
   } catch (error) {
     console.log("witchSimulatorIsInstalled", error);

@@ -1,4 +1,3 @@
-import React from "react";
 type StartSimulator_Comp = {
   name: string;
   type: number;
@@ -11,7 +10,6 @@ const StartSimulatorButton = (props: StartSimulator_Comp) => {
     let deviceBooted = false;
     do {
       const devDone = await window.android.checkIfBootHasCompleted();
-      console.log("devDone", devDone);
       if (devDone) {
         if (devDone.status === 0) {
           deviceBooted = true;
@@ -28,8 +26,6 @@ const StartSimulatorButton = (props: StartSimulator_Comp) => {
           (await window.android.openMendixApp(installedAppName));
       }
       if (!installedAppName) {
-        console.log("🔥");
-
         await window.android.downloadMendixApps(props.type);
         // MX MUST BE INSTALLED
         await setTimeout(async () => {
