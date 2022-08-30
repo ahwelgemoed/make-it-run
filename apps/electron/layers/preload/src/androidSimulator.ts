@@ -18,20 +18,20 @@ import AdmZip from "adm-zip";
 export const dataPath =
   process.env.NODE_ENV === "development"
     ? path.join(__dirname, "../../..")
-    : path.join(process.resourcesPath, "data");
+    : path.join(process.resourcesPath);
 
 const electron = require("electron");
 const spawn = require("cross-spawn");
 
 export const witchSimulatorIsInstalled = async () => {
   try {
-    // const { stdout } = await spawnAsync("emulator", ["-list-avds"], {
-    //   env: {
-    //     NODE_ENV: "production",
-    //     PATH: process.env.PATH,
-    //   },
-    // });
-    const { stdout } = await spawnAsync("emulator", ["-list-avds"]);
+    const { stdout } = await spawnAsync("emulator", ["-list-avds"], {
+      env: {
+        NODE_ENV: "production",
+        PATH: process.env.PATH,
+      },
+    });
+    // const { stdout } = await spawnAsync("emulator", ["-list-avds"]);
     return stdout;
   } catch (error) {
     console.log("witchSimulatorIsInstalled", error);

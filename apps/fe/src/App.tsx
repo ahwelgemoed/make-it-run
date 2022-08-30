@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navbar from "./component/Navbar";
 import StartSimulatorButton from "./component/StartSimulatorButton";
+import WebAccessed from "./component/WebAccessed";
 
 function App() {
   const [listOfSimulatorsInstalled, setListOfSimulatorsInstalled] = useState<
@@ -8,7 +9,6 @@ function App() {
   >(undefined);
 
   const getSimulators = async () => {
-    console.log("first");
     const simulators = await window.android.witchSimulatorIsInstalled();
     const parseSimulators = simulators.split("\n").filter(Boolean);
     setListOfSimulatorsInstalled(parseSimulators);
@@ -16,6 +16,10 @@ function App() {
   useEffect(() => {
     getSimulators();
   }, []);
+
+  if (!window.android) {
+    return <WebAccessed />;
+  }
 
   return (
     <div className="h-screen p-6">
